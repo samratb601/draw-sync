@@ -1,17 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { Socket, io } from "socket.io-client";
+import { useBoardContext } from "../context/BoardContext";
 
-const Board = ({
-  roomId,
-  brushColor,
-  brushSize,
-}: {
-  roomId?: string;
-  brushColor: string;
-  brushSize: number;
-}) => {
+const Board = ({ roomId }: { roomId?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const {brushColor,brushSize} = useBoardContext()
+
   const [socket, setSocket] = useState<Socket | null>();
   const [windowSize, setWindowSize] = useState([
     window.innerWidth * 0.8,
@@ -38,14 +34,14 @@ const Board = ({
 
   useEffect(() => {
     if (socket) {
-      console.log(socket)
-      socket.on("connect",()=>{
+      console.log(socket);
+      socket.on("connect", () => {
         socket.emit("join-room", {
           id: socket.id,
           roomId,
           message: "Joined a new User",
         });
-      })
+      });
       socket.on("join-room", (message) => {
         console.log("joined");
         // if (socket.id === data.id) return;
@@ -138,8 +134,6 @@ const Board = ({
       canvas.removeEventListener("mouseout", endDrawing);
     };
   }, [roomId, brushColor, brushSize, socket]);
-
-  
 
   return (
     <div className="shadow-md rounded-md overflow-hidden border-2 border-blue-300 m-4">
