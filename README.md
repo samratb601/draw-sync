@@ -13,8 +13,8 @@ Real-time collaborative whiteboard for fun.
 
 ## Usage
 
-1. Run the application server: `npm start`
-1. Run the application client: `npm run dev`
+1. Run the server within `./server` directory: `npm start` or `yarn start`
+1. Run the client application within `./client` directory: `npm run dev` or `yarn dev`
 3. Open the app in your browser: `http://localhost:5173/`
 4. Enjoy sketching
 
