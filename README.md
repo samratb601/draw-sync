@@ -7,7 +7,7 @@ Real-time collaborative whiteboard for fun and sketching.
 1. Clone the repository: `https://github.com/samratb601/whiteboard-sync.git`
 3. Navigate to `whiteboard-sync` directory
 2. Navigate to the server project folder: `cd ./server`
-3. Install dependencies: `npm install`
+3. Install dependencies: `npm install` or `yarn install`
 4. Navigate to the client project folder: `cd ./client`
 5. Install dependencies: `npm install` or `yarn install`
 
