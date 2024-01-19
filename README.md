@@ -1,6 +1,6 @@
 # Whiteboard Sync
 
-Real-time collaborative whiteboard for fun and sketching.
+Real-time collaborative whiteboard for fun.
 
 ## Installation
 
@@ -17,5 +17,20 @@ Real-time collaborative whiteboard for fun and sketching.
 1. Run the application client: `npm run dev`
 3. Open the app in your browser: `http://localhost:5173/`
 4. Enjoy sketching
+
+5. ## Technologies Used
+
+### Server:
+
+- [Node.js](https://nodejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Socket.IO](https://socket.io/)
+
+### Client:
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 
