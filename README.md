@@ -18,7 +18,7 @@ Real-time collaborative whiteboard for fun.
 3. Open the app in your browser: `http://localhost:5173/`
 4. Enjoy sketching
 
-5. ## Technologies Used
+## Technologies Used
 
 ### Server:
 
