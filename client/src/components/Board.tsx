@@ -10,7 +10,7 @@ const Board = ({ roomId }: { roomId?: string }) => {
 
   const [socket, setSocket] = useState<Socket | null>();
   const [windowSize, setWindowSize] = useState([
-    window.innerWidth * 0.8,
+    window.innerWidth,
     window.innerHeight * 0.96,
   ]);
 
