@@ -19,7 +19,9 @@ export default function CreateRoom() {
     e.preventDefault();
     if (mode === "join" || isRoomIdCreated) {
       if (!roomId) return;
+      setIsLoading(true);
       await delay(1000 * 2);
+      setIsLoading(false);
       navigate(`/${roomId}`);
       return;
     }
