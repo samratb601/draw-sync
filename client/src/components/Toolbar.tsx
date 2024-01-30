@@ -2,13 +2,18 @@ import Draggable from "react-draggable";
 import { FaRedoAlt, FaUndoAlt } from "react-icons/fa";
 import { IoMove } from "react-icons/io5";
 import { useBoardContext } from "../context/BoardContext";
-
+import { IoMdExit } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export default function Toolbar() {
-  const { setBrushColor , undo , redo} = useBoardContext();
+  const navigate = useNavigate();
+  const { setBrushColor, undo, redo } = useBoardContext();
 
   return (
-    <Draggable handle=".drag-handle" defaultPosition={{ x: 0, y: 0 }}>
+    <Draggable
+      handle=".drag-handle"
+      defaultPosition={{ x: window.innerWidth - 100, y: 50 }}
+    >
       <div className="absolute top-[10vh]">
         <div className="drag-handle absolute -top-4 left-4">
           <button className="bg-blue-600 text-white p-1 rounded-md hover:bg-blue-600/90 text-center">
@@ -33,7 +38,6 @@ export default function Toolbar() {
         </div>
 
         <div className="bg-[#fff] py-4 px-1 border-2 rounded-md shadow flex flex-col items-center gap-2">
-          
           <div
             className="p-1 cursor-pointer hover:bg-sky-500 hover:text-white rounded"
             onClick={undo}
@@ -45,6 +49,14 @@ export default function Toolbar() {
             onClick={redo}
           >
             <FaRedoAlt />
+          </div>
+        </div>
+        <div className="bg-[#fff] py-4 px-1 border-2 rounded-md shadow flex flex-col items-center gap-2">
+          <div
+            className="p-1 cursor-pointer hover:bg-blue-500 hover:text-white rounded"
+            onClick={() => {navigate('/')}}
+          >
+            <IoMdExit />
           </div>
         </div>
       </div>
