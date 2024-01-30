@@ -31,8 +31,15 @@ export default function CreateRoom() {
     setRoomId(Math.random().toString(36).slice(2));
     setIsLoading(false);
     setIsRoomIdCreated(true);
-    
   }
+
+  const joinSolo = async () => {
+    setIsLoading(true);
+    await delay(1000 * 2);
+    setIsLoading(false);
+    navigate(`/${Math.random().toString(36).slice(2)}`)
+  };
+
   const switchMode = () => {
     setRoomId(null);
     setIsRoomIdCreated(false);
@@ -82,6 +89,14 @@ export default function CreateRoom() {
             </p>
           </div>
         </form>
+        <p className="text-center font-semibold text-gray-500 mt-8">Or</p>
+        <button
+          className="w-full rounded-md h-[40px] bg-blue-700 hover:bg-blue-600 text-white font-semibold tracking-wider my-4 px-5 disabled:bg-blue-400"
+          disabled={isLoading}
+          onClick={joinSolo}
+        >
+          Enter without room
+        </button>
       </div>
     </div>
   );
