@@ -6,7 +6,7 @@ import { useBoardContext } from "../context/BoardContext";
 const Board = ({ roomId }: { roomId?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const {brushColor,brushSize} = useBoardContext()
+  const { brushColor, brushSize } = useBoardContext();
 
   const [socket, setSocket] = useState<Socket | null>();
   const [windowSize, setWindowSize] = useState([
@@ -55,7 +55,7 @@ const Board = ({ roomId }: { roomId?: string }) => {
         image.src = data;
 
         const canvas = canvasRef.current as HTMLCanvasElement;
-      
+
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
         // Draw the image onto the canvas
@@ -71,15 +71,19 @@ const Board = ({ roomId }: { roomId?: string }) => {
     let isDrawing = false;
     let lastX = 0;
     let lastY = 0;
-    const startDrawing = (e: { offsetX: number; offsetY: number }) => {
+    const startDrawing = (e: MouseEvent | TouchEvent) => {
       isDrawing = true;
-
+      // alert("drawing started")
       console.log(`drawing started`, brushColor, brushSize);
-      [lastX, lastY] = [e.offsetX, e.offsetY];
+      if (e.type === "mousedown" && e instanceof MouseEvent) {
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      } else if (e.type === "touchstart" && e instanceof TouchEvent) {
+        [lastX, lastY] = [e.touches[0].clientX, e.touches[0].clientY];
+      }
     };
 
     // Function to draw
-    const draw = (e: { offsetX: number; offsetY: number }) => {
+    const draw = (e: MouseEvent | TouchEvent) => {
       if (!isDrawing) return;
 
       const canvas = canvasRef.current as HTMLCanvasElement;
@@ -87,11 +91,19 @@ const Board = ({ roomId }: { roomId?: string }) => {
       if (ctx) {
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
-        ctx.lineTo(e.offsetX, e.offsetY);
+        if (e.type === "mousemove" && e instanceof MouseEvent) {
+          ctx.lineTo(e.offsetX, e.offsetY);
+        } else if (e.type === "touchmove" && e instanceof TouchEvent) {
+          ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY);
+        }
         ctx.stroke();
       }
 
-      [lastX, lastY] = [e.offsetX, e.offsetY];
+      if (e.type === "mousemove" && e instanceof MouseEvent) {
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      } else if (e.type === "touchmove" && e instanceof TouchEvent) {
+        [lastX, lastY] = [e.touches[0].clientX, e.touches[0].clientY];
+      }
     };
 
     // Function to end drawing
@@ -120,11 +132,16 @@ const Board = ({ roomId }: { roomId?: string }) => {
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
     }
-    // Event listeners for drawing
+    // Event listeners for drawing from computer
     canvas.addEventListener("mousedown", startDrawing);
     canvas.addEventListener("mousemove", draw);
     canvas.addEventListener("mouseup", endDrawing);
     canvas.addEventListener("mouseout", endDrawing);
+
+    // Event listeners for drawing from mobile
+    canvas.addEventListener("touchstart", startDrawing);
+    canvas.addEventListener("touchmove", draw);
+    canvas.addEventListener("touchend", endDrawing);
 
     return () => {
       // Clean up event listeners when component unmounts
@@ -132,11 +149,17 @@ const Board = ({ roomId }: { roomId?: string }) => {
       canvas.removeEventListener("mousemove", draw);
       canvas.removeEventListener("mouseup", endDrawing);
       canvas.removeEventListener("mouseout", endDrawing);
+
+      canvas.removeEventListener("touchstart", startDrawing);
+      canvas.removeEventListener("touchmove", draw);
+      canvas.removeEventListener("touchend", endDrawing);
+
     };
   }, [roomId, brushColor, brushSize, socket]);
 
   return (
-    <div className="shadow-md rounded-md overflow-hidden border-2 border-blue-300 m-4">
+    <div 
+    className="shadow-md rounded-md overflow-hidden border-2 border-blue-300 p-4">
       <canvas
         ref={canvasRef}
         width={windowSize[0]}
