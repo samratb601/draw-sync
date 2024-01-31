@@ -1,40 +1,38 @@
 import Draggable from "react-draggable";
 import { FaRedoAlt, FaUndoAlt } from "react-icons/fa";
-import { IoMove } from "react-icons/io5";
 import { useBoardContext } from "../context/BoardContext";
-import { IoMdExit } from "react-icons/io";
+import { IoIosColorPalette, IoMdExit } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 export default function Toolbar() {
   const navigate = useNavigate();
-  const { setBrushColor, undo, redo } = useBoardContext();
+  const { brushColor, setBrushColor, undo, redo } = useBoardContext();
 
   return (
     <Draggable
       handle=".drag-handle"
       defaultPosition={{ x: window.innerWidth - 100, y: 50 }}
     >
-      <div className="absolute top-[10vh]">
-        <div className="drag-handle absolute -top-4 left-4">
-          <button className="bg-blue-600 text-white p-1 rounded-md hover:bg-blue-600/90 text-center">
-            <IoMove />
-          </button>
-        </div>
+      <div className="absolute top-[10vh] drag-handle">
 
         <div className="bg-[#fff] py-2 px-1 border-2 rounded-md shadow">
-          <div
-            title={"brush color"}
-            className={`relative group px-2 py-2 my-1 rounded cursor-pointer`}
-            onClick={() => {}}
-          >
-            <input
-              className="w-[30px] h-[30px] rounded-full overflow-hidden cursor-pointer"
-              type="color"
-              onChange={(e) => {
-                setBrushColor(e.target.value);
-              }}
-            />
-          </div>
+          <label>
+            <div
+              title={"brush color"}
+              className={`relative group px-2 py-2 my-1 rounded cursor-pointer`}
+              onClick={() => {}}
+            >
+              <input
+                className="w-[30px] h-[30px] rounded-full overflow-hidden cursor-pointer"
+                type="color"
+                hidden
+                onChange={(e) => {
+                  setBrushColor(e.target.value);
+                }}
+              />
+              <IoIosColorPalette style={{ color: brushColor }} size={30}/>
+            </div>
+          </label>
         </div>
 
         <div className="bg-[#fff] py-4 px-1 border-2 rounded-md shadow flex flex-col items-center gap-2">
@@ -54,7 +52,9 @@ export default function Toolbar() {
         <div className="bg-[#fff] py-4 px-1 border-2 rounded-md shadow flex flex-col items-center gap-2">
           <div
             className="p-1 cursor-pointer hover:bg-blue-500 hover:text-white rounded"
-            onClick={() => {navigate('/')}}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             <IoMdExit />
           </div>
