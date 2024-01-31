@@ -1,4 +1,4 @@
-import Draggable from "react-draggable";
+import Draggable, { DraggableEvent } from "react-draggable";
 import { FaRedoAlt, FaUndoAlt } from "react-icons/fa";
 import { useBoardContext } from "../context/BoardContext";
 import { IoIosColorPalette, IoMdExit } from "react-icons/io";
@@ -8,13 +8,26 @@ export default function Toolbar() {
   const navigate = useNavigate();
   const { brushColor, setBrushColor, undo, redo } = useBoardContext();
 
+  const defaultPos = JSON.parse(
+    localStorage.getItem("toolbar_position") ||
+      `${JSON.stringify({ x: window.innerWidth - 100, y: 50 })}`
+  );
+
+
+  function onDrag(e: DraggableEvent) {
+    const el: HTMLDivElement | null = e.target as HTMLDivElement;
+    if (!el) return;
+    const { x, y } = el.getBoundingClientRect();
+    localStorage.setItem("toolbar_position", JSON.stringify({ x, y }));
+  }
+
   return (
     <Draggable
       handle=".drag-handle"
-      defaultPosition={{ x: window.innerWidth - 100, y: 50 }}
+      defaultPosition={defaultPos}
+      onDrag={onDrag}
     >
       <div className="absolute top-[10vh] drag-handle">
-
         <div className="bg-[#fff] py-2 px-1 border-2 rounded-md shadow">
           <label>
             <div
@@ -30,7 +43,7 @@ export default function Toolbar() {
                   setBrushColor(e.target.value);
                 }}
               />
-              <IoIosColorPalette style={{ color: brushColor }} size={30}/>
+              <IoIosColorPalette style={{ color: brushColor }} size={30} />
             </div>
           </label>
         </div>
