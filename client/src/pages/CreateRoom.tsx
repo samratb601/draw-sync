@@ -47,26 +47,26 @@ export default function CreateRoom() {
   };
 
   return (
-    <div className="bg-gradient-to-tr from-white to-blue-700 h-screen w-full flex justify-center items-center">
-      <div className="w-[400px] h-auto p-8 bg-white rounded-md shadow-xl">
+    <div className="bg-gradient-to-tr from-white to-blue-700 min-h-screen w-full flex justify-center items-center">
+      <div className="w-[350px] md:w-[400px] h-auto p-8 bg-white rounded-md shadow-xl">
         <div className="">
           {/* <h2 className="text-[2rem] font-bold tracking-wide text-blue-600">
             Welcome
           </h2> */}
-          <h2 className="mt-3 text-[2.2rem] text-blue-700 tracking-[0.6px] font-bold">
+          <h2 className="mt-2 md:mt-3 text-[1.9rem] md:text-[2.2rem] text-blue-700 tracking-[0.6px] font-bold">
             Draw with fun
           </h2>
         </div>
-        <form className="mt-20" onSubmit={formSubmit}>
+        <form className="mt-12 md:mt-20" onSubmit={formSubmit}>
           <div className="tracking-wide">
-            <label className="text-xl font-semibold text-blue-600">
+            <label className="text-lg md:text-xl font-semibold text-blue-600">
               {mode === "join" ? "Enter Room ID" : "Generate Room ID"}
             </label>
 
             <input
               value={roomId || ""}
               className="w-full block border-2 border-blue-600 rounded-md 
-              mt-4 px-2 py-3 focus:outline-blue-500 text-blue-700
+              mt-4 px-2 py-2 md:py-3 focus:outline-blue-500 text-blue-700
               font-semibold tracking-wide disabled:bg-gray-200 focus:ring-2 focus:ring-offset-2
               focus:ring-blue-600
               "
