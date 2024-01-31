@@ -55,7 +55,7 @@ const Board = ({ roomId }: { roomId?: string }) => {
         image.src = data;
 
         const canvas = canvasRef.current as HTMLCanvasElement;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+      
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
         // Draw the image onto the canvas
