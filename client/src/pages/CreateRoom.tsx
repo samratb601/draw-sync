@@ -48,10 +48,13 @@ export default function CreateRoom() {
 
   return (
     <div className="bg-gradient-to-tr from-white to-blue-700 h-screen w-full flex justify-center items-center">
-      <div className="w-[400px] h-[500px] p-8 bg-white rounded-md shadow-xl">
+      <div className="w-[400px] h-auto p-8 bg-white rounded-md shadow-xl">
         <div className="">
-          <h2 className="text-[2rem] font-bold tracking-wide text-blue-600">
+          {/* <h2 className="text-[2rem] font-bold tracking-wide text-blue-600">
             Welcome
+          </h2> */}
+          <h2 className="mt-3 text-[2.2rem] text-blue-700 tracking-[0.6px] font-bold">
+            Draw with fun
           </h2>
         </div>
         <form className="mt-20" onSubmit={formSubmit}>
