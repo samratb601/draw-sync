@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MdOutlineDraw } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 async function delay(amt: number) {
@@ -37,7 +38,7 @@ export default function CreateRoom() {
     setIsLoading(true);
     await delay(1000 * 2);
     setIsLoading(false);
-    navigate(`/${Math.random().toString(36).slice(2)}`)
+    navigate(`/${Math.random().toString(36).slice(2)}`);
   };
 
   const switchMode = () => {
@@ -50,11 +51,8 @@ export default function CreateRoom() {
     <div className="bg-gradient-to-tr from-white to-blue-700 min-h-screen w-full flex justify-center items-center">
       <div className="w-[350px] md:w-[400px] h-auto p-8 bg-white rounded-md shadow-xl">
         <div className="">
-          {/* <h2 className="text-[2rem] font-bold tracking-wide text-blue-600">
-            Welcome
-          </h2> */}
-          <h2 className="mt-2 md:mt-3 text-[1.9rem] md:text-[2.2rem] text-blue-700 tracking-[0.6px] font-bold">
-            Draw with fun
+          <h2 className="mt-2 md:mt-3 text-[1.5rem] md:text-[1.8rem] text-blue-600 tracking-[1px] font-extrabold">
+            <MdOutlineDraw size={40} className="inline" /> Draw Sync
           </h2>
         </div>
         <form className="mt-12 md:mt-20" onSubmit={formSubmit}>
