@@ -11,7 +11,7 @@ export default function BoardPage() {
 
   return (
     <BoardContextProvider>
-      <div className="w-full h-screen flex justify-center items-center p-20 bg-gradient-to-l from-blue-500 to-sky-900">
+      <div className="w-full h-screen flex justify-center items-center p-20 bg-gradient-to-tr from-blue-600 to-slate-300">
         <div className="sm:w-[95vw] md:w-[80vw] lg:w-[60vw] flex gap-x-4">
           <div className="w-[250px] bg-white rounded-md shadow-xl">
             <Toolbar />
