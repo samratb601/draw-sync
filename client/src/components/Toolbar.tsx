@@ -117,7 +117,7 @@ export default function Toolbar() {
           className={` py-2 my-1 flex flex-col gap-2`}
         >
           {/* // REDO UNDO  */}
-          <div className="w-full flex justify-between gap-x-4">
+          {/* <div className="w-full flex justify-between gap-x-4">
             <button
               title="Undo"
               className="border-2 border-blue-600 text-blue-600 disabled:opacity-60 rounded-md px-3 py-1 w-full"
@@ -130,11 +130,11 @@ export default function Toolbar() {
               title="Redo"
               className="border-2 border-blue-600 text-blue-600  disabled:opacity-60 rounded-md px-3 py-1 w-full"
               onClick={redo}
-              // disabled={history.length <=1}
+              // disabled={historyIndex===history.length || historyIndex!=1}
             >
               <GrRedo className="inline mr-1" size={20} />
             </button>
-          </div>
+          </div> */}
 
           <button
             className="w-full h-[40px] border-2 text-blue-600  border-blue-600 hover:bg-blue-600 hover:text-white tracking-wide rounded-md"
