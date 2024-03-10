@@ -142,7 +142,7 @@ const Board = ({ roomId }: { roomId?: string }) => {
         socket.emit("canvasImage", { roomId, dataURL });
         console.log("drawing ended");
       }
-      saveCanvasHistory()
+      saveCanvasHistory();
       isDrawing = false;
     };
 
@@ -209,12 +209,12 @@ const Board = ({ roomId }: { roomId?: string }) => {
   }, [roomId, toolType, brushColor, brushSize, socket]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={windowSize[0]}
-      height={windowSize[1]}
-      style={{ backgroundColor: "white" }}
-    />
+      <canvas
+        ref={canvasRef}
+        width={windowSize[0]}
+        height={windowSize[1]}
+        style={{ backgroundColor: "white" }}
+      />
   );
 };
 

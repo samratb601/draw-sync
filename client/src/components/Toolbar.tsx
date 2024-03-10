@@ -26,6 +26,7 @@ export default function Toolbar() {
   } = useBoardContext();
 
   const shapes: { label: ToolType; icon: ReactNode }[] = [
+    { label: "circle", icon: <FaRegCircle size={20} className="inline" /> },
     {
       label: "triangle",
       icon: <IoTriangleOutline size={20} className="inline" />,
@@ -34,10 +35,9 @@ export default function Toolbar() {
       label: "rectangle",
       icon: <LuRectangleHorizontal size={20} className="inline" />,
     },
-    { label: "circle", icon: <FaRegCircle size={20} className="inline" /> },
-    { label: "brush", icon: <LuBrush size={20} className="inline" /> },
     { label: "line", icon: <MdOutlineStraight size={20} className="inline" /> },
-    { label: "eraser", icon: <LuEraser size={20} className="inline" /> },
+    // { label: "brush", icon: <LuBrush size={20} className="inline" /> },
+    // { label: "eraser", icon: <LuEraser size={20} className="inline" /> },
   ];
 
   const onClickExit = () => {
@@ -45,7 +45,7 @@ export default function Toolbar() {
   };
 
   return (
-    <div className="h-full px-4 py-3 text-[0.9rem] tracking-wide flex flex-col justify-between">
+    <div className="relative h-full px-4 py-3 text-[0.9rem] tracking-wide flex flex-col justify-between">
       <div>
         {/* Shapes  */}
         <div className="">
@@ -60,6 +60,7 @@ export default function Toolbar() {
                 onClick={() => {
                   setToolType(item.label);
                 }}
+                key={item.label}
               >
                 {item.icon}&nbsp;&nbsp;
                 {item.label.charAt(0).toUpperCase() +
@@ -71,9 +72,38 @@ export default function Toolbar() {
         {/* //Options  */}
         <div className="border-t pt-3">
           <h3 className="text-gray-600 text-[1rem] font-semibold">Options</h3>
+
+          <div
+            className={`my-3 hover:text-blue-600 cursor-pointer ${
+              toolType === "brush"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-600"
+            }`}
+            onClick={() => {
+              setToolType("brush");
+            }}
+          >
+            <LuBrush size={20} className="inline" />
+            &nbsp;&nbsp;Brush
+          </div>
+
+          <div
+            className={`my-3 hover:text-blue-600 cursor-pointer ${
+              toolType === "eraser"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-600"
+            }`}
+            onClick={() => {
+              setToolType("eraser");
+            }}
+          >
+            <LuEraser size={20} className="inline" />
+            &nbsp;&nbsp;Eraser
+          </div>
+
           <div
             title={"Choose color"}
-            className={`relative group py-2 my-1 rounded cursor-pointer`}
+            className={`py-2 my-1 rounded cursor-pointer`}
           >
             <label>
               <input
@@ -100,6 +130,8 @@ export default function Toolbar() {
               <span className="">Choose stroke size</span>
               <input
                 className="w-full mt-1"
+                draggable
+                onDragStart={(e) => e.preventDefault()}
                 type="range"
                 value={brushSize}
                 onChange={(e) => {
@@ -113,8 +145,7 @@ export default function Toolbar() {
 
       <div>
         <div
-          title={"Choose color"}
-          className={` py-2 my-1 flex flex-col gap-2`}
+          className={`py-2 my-1 flex flex-col gap-2`}
         >
           {/* // REDO UNDO  */}
           {/* <div className="w-full flex justify-between gap-x-4">

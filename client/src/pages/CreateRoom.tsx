@@ -55,7 +55,7 @@ export default function CreateRoom() {
             <MdOutlineDraw size={40} className="inline" /> Draw Sync
           </h2>
         </div>
-        <form className="mt-12 md:mt-20" onSubmit={formSubmit}>
+        <form className="mt-12 md:mt-14" onSubmit={formSubmit}>
           <div className="tracking-wide">
             <label className="text-lg md:text-xl font-semibold text-blue-600">
               {mode === "join" ? "Enter Room ID" : "Generate Room ID"}
