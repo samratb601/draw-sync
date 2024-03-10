@@ -1,9 +1,8 @@
 import Board from "../components/Board";
 import Toolbar from "../components/Toolbar";
 import { Navigate, useParams } from "react-router-dom";
-import Draggable, { DraggableEvent, DraggableEventHandler } from "react-draggable";
 import { BoardContextProvider } from "../context/BoardContext";
-import { MouseEvent } from "react";
+
 
 export default function BoardPage() {
   const { roomId } = useParams();
